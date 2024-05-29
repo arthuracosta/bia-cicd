@@ -19,10 +19,10 @@ phases:
     commands:
       - echo Build finalizado com sucesso em `date`
       - echo Fazendo push da imagem para o ECR...
-      - codebuild-breakpoint
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Gerando artefato da imagem para o ECS
       - printf '[{"name":"bia","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - codebuild-breakpoint
 artifacts:
   files: imagedefinitions.json
